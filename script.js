@@ -6,12 +6,12 @@
 ///confirm to user play again or not
 //play again equals yes- start over
 
-//Declared a global variable for user to store the input value ,r,p,s
-var options = ['r', 'p', 's']
-var userScore= []
-var computerScore=[]
-
-
+//---My code---
+//Declared a global variable for computer to store the input value ,r,p,s
+var options = ['r', 'p', 's'];
+var wins = 0;
+var losses = 0;
+var ties = 0;
 
 //created a function game//
 function game(){
@@ -29,60 +29,34 @@ function game(){
     
      //window alert of computers guess display to user
     window.alert("Your opponent's choice is, " + computerChoice)
-//-----------------------------------------------------
-    //if statements conditionals--this is repetitive
-    if (computerChoice === 'r' && rps === 's'){
-        window.alert('You have lost! Rock smashes scissors, Try again.')
-        computerScore +=1
-    }
-     if (computerChoice === 'r' && rps === 'r'){
-     window.alert('You have tied! Try again.')
-        // computerScore += 0
-        // userScore += 0
-     }
-     if (computerChoice ==='r' && rps === 'p'){
-         window.alert('Congradulations! Paper beats rock, you have won!')
-         userScore +=1
-     }
-     if (computerChoice === 's' && rps === 'r'){
-         window.alert('Congradulations! Rock smashed scissors you have won!')
-         userScore +=1
-     }
-     if (computerChoice === 's' && rps === 's'){
-         window.alert('You have tied.')
-     }
-     if (computerChoice === 's' && rps === 'p'){
-         window.alert('You have lost! Scissors eats paper')
-         computerScore +=1
-     }
-     if (computerChoice === 'p' && rps === 's'){
-         window.alert('Congradulations! Scissors eats paper, you have won!')
-         userScore +=1
-     }
-    if (computerChoice ==='p' && rps ==='p'){
-        window.alert('You have tied.')
-     }
-     if (computerChoice === 'p' && rps ==='r'){
-         window.alert('You have lost! Paper covers rock')
-     }
-     --------------------   
-     var stats = {
-            Wins; 
-        }
-     window.alert('Your score is ' + userScore[i] + 'Computer score is '+ computerScore[i])
+
+//The logic------   
+if (computerChoice === rps){
+    ties++//is ties+1
+    window.alert('You have tied! Try again.');
+}else if((rps === 'r' && computerChoice ==='s')||
+         (rps ==='s' && computerChoice === 'p')||
+         (rps === 'p' && computerChoice ==='r')
+) {
+    wins++;//adds 1 to wins variable
+    window.alert('You Win!');
+} else {
+    losses++;//adds 1 to losses variable
+    window.alert('You Lost!')
 }
+//print stats with line breaks
+window.alert('Stats:\nWins:' +wins + '\nLosses:' + losses +'\nTies:' + ties);
+
+//ask user to play again
+var isPlayAgain = window.confirm('Play again?');
+
+//if yes, its a true statement then game function gets rerun all over again
+if (isPlayAgain){
+    game();
+}
+}//end of the function block
 
 game();
 
-
-
- //--------------
-// if (window.confirm("Do you really want to leave?")) {
-//     window.open("exit.html", "Thanks for Visiting!");
-//   }
-
-//   //-------------------
-//   result = window.prompt(message, default);
-
-//   //
-//   Math.random()
+//why do we initiate the game to play again within the function block and not on the outside?
+//What are the checks for error handling the values or strings? 
